@@ -584,13 +584,17 @@
   /* Slideshow navigation */
   .slide-nav {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-between;
     padding: 16px 24px;
     background: var(--gris-clair);
     border-top: 1px solid #e5e7eb;
-    flex-wrap: nowrap;
-    gap: 10px;
+    gap: 12px;
+  }
+  .slide-nav-btns {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
   }
   .slide-nav-btn {
     background: var(--bleu);
@@ -2168,12 +2172,12 @@
 
     <!-- NAVIGATION DIAPORAMA -->
     <div class="slide-nav">
-      <button class="slide-nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Précédent</button>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex:1">
-        <div class="slide-dots" id="slideDots"></div>
-        <span class="slide-counter" id="slideCounter">Slide 1 / 35</span>
+      <div class="slide-dots" id="slideDots"></div>
+      <span class="slide-counter" id="slideCounter">Slide 1 / 35</span>
+      <div class="slide-nav-btns">
+        <button class="slide-nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Précédent</button>
+        <button class="slide-nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
       </div>
-      <button class="slide-nav-btn" id="nextBtn" onclick="changeSlide(1)">Suivant →</button>
     </div>
   </div>
 </section>

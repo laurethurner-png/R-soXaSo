@@ -518,7 +518,7 @@
     text-align: center;
     margin-top: 12px;
   }
-  .gaspi-ademe-num { font-size: 2rem; font-weight: 800; color: var(--gris); text-decoration: line-through; }
+  .gaspi-ademe-num { font-size: 2rem; font-weight: 800; color: var(--gris); }
   .gaspi-ademe-lbl { font-size: 0.78rem; color: var(--gris); }
   .gaspi-ademe-badge {
     background: var(--vert);
@@ -589,7 +589,7 @@
     padding: 16px 24px;
     background: var(--gris-clair);
     border-top: 1px solid #e5e7eb;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
     gap: 10px;
   }
   .slide-nav-btn {
@@ -801,16 +801,9 @@
     margin-bottom: 2px;
   }
 
-  /* ===== SECTIONS MASQUÉES ===== */
-  .section-collapsed { display: none !important; }
-
-  /* ===== NAV TOGGLE INDICATOR ===== */
-  nav a.section-btn::after {
-    content: ' ▼';
-    font-size: 0.65rem;
-    opacity: 0.6;
-  }
-  nav a.section-btn.open::after { content: ' ▲'; }
+  /* ===== PAGES ===== */
+  .page { display: none; }
+  .page.active { display: block; }
 
 
   /* ===== PRINT ===== */
@@ -853,13 +846,13 @@
 
 <!-- NAV -->
 <nav>
-  <a href="#kpis" onclick="setActive(this)">Chiffres Clés</a>
-  <a href="#diaporama" class="section-btn" onclick="toggleSection('diaporama', this); return false;">Diaporama</a>
-  <a href="#galerie" class="section-btn" onclick="toggleSection('galerie', this); return false;">Paula On Tour</a>
+  <a href="#kpis" class="active" onclick="showPage('kpis', this); return false;">Chiffres Clés</a>
+  <a href="#diaporama" onclick="showPage('diaporama', this); return false;">Diaporama</a>
+  <a href="#galerie" onclick="showPage('galerie', this); return false;">Paula On Tour</a>
 </nav>
 
 <!-- ===== SECTION KPIs ===== -->
-<section id="kpis">
+<section id="kpis" class="page active">
 <div class="inner">
   <div class="section-title">
     <h2>Chiffres Clés 2025</h2>
@@ -892,10 +885,10 @@
 
   <!-- Tabs par secteur -->
   <div class="kpi-tabs">
-    <button class="kpi-tab active" onclick="showKpi('tous', this)">🏢 Tous les établissements</button>
-    <button class="kpi-tab" onclick="showKpi('ehpad', this)">🏠 EHPAD</button>
-    <button class="kpi-tab" onclick="showKpi('fam', this)">🏡 FAM / MAS</button>
-    <button class="kpi-tab" onclick="showKpi('ime', this)">🏫 IME / ESAT</button>
+    <button class="kpi-tab active" onclick="showKpi('tous', this)">Tous les établissements</button>
+    <button class="kpi-tab" onclick="showKpi('ehpad', this)">EHPAD</button>
+    <button class="kpi-tab" onclick="showKpi('fam', this)">FAM / MAS</button>
+    <button class="kpi-tab" onclick="showKpi('ime', this)">IME / ESAT</button>
   </div>
 
   <div id="kpi-tous" class="kpi-panel active">
@@ -923,7 +916,7 @@
       </div>
     </div>
     <div class="kpi-section-label">Hygiène — Moyennes tous secteurs</div>
-    <div class="kpi-grid">
+    <div class="kpi-grid" style="margin-bottom:8px">
       <div class="kpi-card green">
         <div class="kpi-number">91,7%</div>
         <div class="kpi-label">Analyses Surface Eurofins</div>
@@ -943,6 +936,38 @@
         <div class="kpi-number">10</div>
         <div class="kpi-label">Audits Internes</div>
         <div class="kpi-sub">4 EHPAD · 3 FAM/MAS · 3 IME</div>
+      </div>
+    </div>
+    <div class="kpi-section-label">Économique — Synthèse tous établissements</div>
+    <div class="kpi-grid">
+      <div class="kpi-card">
+        <div class="kpi-number">3 709 805 €</div>
+        <div class="kpi-label">CA Total Réalisé 2025</div>
+        <div class="kpi-budget-line">
+          <div class="kpi-number kpi-budget">3 672 912 €</div>
+          <div class="kpi-label">Budget</div>
+        </div>
+      </div>
+      <div class="kpi-card green">
+        <div class="kpi-number">2 200 973 €</div>
+        <div class="kpi-label">CA Fixe Réalisé 2025</div>
+        <div class="kpi-budget-line">
+          <div class="kpi-number kpi-budget">2 301 575 €</div>
+          <div class="kpi-label">Budget</div>
+        </div>
+      </div>
+      <div class="kpi-card accent">
+        <div class="kpi-number">1 508 302 €</div>
+        <div class="kpi-label">CA Variable Réalisé 2025</div>
+        <div class="kpi-budget-line">
+          <div class="kpi-number kpi-budget">1 371 337 €</div>
+          <div class="kpi-label">Budget</div>
+        </div>
+      </div>
+      <div class="kpi-card rouge">
+        <div class="kpi-number">+1%</div>
+        <div class="kpi-label">Écart Budget / Réalisé</div>
+        <div class="kpi-sub">Sans révision de prix ni augmentation tarifaire</div>
       </div>
     </div>
   </div>
@@ -1108,6 +1133,14 @@
     </div>
     <div class="kpi-section-label">Économique</div>
     <div class="kpi-grid">
+      <div class="kpi-card green">
+        <div class="kpi-number">685 422 €</div>
+        <div class="kpi-label">CA Total Réalisé 2025</div>
+        <div class="kpi-budget-line">
+          <div class="kpi-number kpi-budget">685 430 €</div>
+          <div class="kpi-label">Budget</div>
+        </div>
+      </div>
       <div class="kpi-card accent">
         <div class="kpi-number">1,56€</div>
         <div class="kpi-label">Vivres Crus / Résident</div>
@@ -1123,7 +1156,7 @@
 </section>
 
 <!-- ===== SECTION DIAPORAMA ===== -->
-<section id="diaporama" class="section-collapsed">
+<section id="diaporama" class="page">
   <div class="section-title">
     <h2>Présentation de la Commission</h2>
     <p>Naviguez entre les slides — 35 slides</p>
@@ -1184,20 +1217,20 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:12px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏥 EHPAD SAINT-VINCENT DE PAUL</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">EHPAD SAINT-VINCENT DE PAUL</strong>
         </div>
         <p style="font-size:0.76rem;font-weight:700;color:#22678E;text-transform:uppercase;letter-spacing:1px;margin:0 0 8px 0">Focus sur les vivres crus :</p>
         <ul style="list-style:none;padding:0;margin:0 0 12px 0;font-size:0.83rem;line-height:1.8;color:#374151">
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Écarts de prix constatés</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Sur-commandes récurrentes</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Demandes d'avoir régulières</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Non-respect des dotations</li>
+          <li style="padding:2px 0 2px 10px">Écarts de prix constatés</li>
+          <li style="padding:2px 0 2px 10px">Sur-commandes récurrentes</li>
+          <li style="padding:2px 0 2px 10px">Demandes d'avoir régulières</li>
+          <li style="padding:2px 0 2px 10px">Non-respect des dotations</li>
         </ul>
         <div style="background:#FEF2F2;border:1px solid #fca5a5;border-radius:6px;padding:10px 14px;font-size:0.81rem;color:#7f1d1d;margin-bottom:8px">
           <strong>Conséquences :</strong> Difficultés de gestion de la facturation, impact important sur les budgets
         </div>
         <div style="background:#F0FBE8;border:1px solid #8DC441;border-radius:6px;padding:10px 14px;font-size:0.81rem;color:#1B3D6A">
-          <strong>🎯 Objectif :</strong> Optimisation et efficience de la facturation des vivres crus
+          <strong>Objectif :</strong> Optimisation et efficience de la facturation des vivres crus
         </div>
       </div>
     </div>
@@ -1210,12 +1243,12 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:14px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏛 ESAT ET EA CHÂTEAU BLANC</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">ESAT ET EA CHÂTEAU BLANC</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.84rem;line-height:2;color:#374151">
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Coûts <strong>légèrement plus faibles</strong> qu'avec l'ancien prestataire</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Nombre de repas <strong>plus élevé</strong> avec Acsent du Sud-Ouest</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#22678E">ℹ</span> Pas de remarque sur les vivres crus — faible quantité concernée</li>
+          <li style="padding:3px 0 3px 10px">Coûts <strong>légèrement plus faibles</strong> qu'avec l'ancien prestataire</li>
+          <li style="padding:3px 0 3px 10px">Nombre de repas <strong>plus élevé</strong> avec Acsent du Sud-Ouest</li>
+          <li style="padding:3px 0 3px 10px">Pas de remarque sur les vivres crus — faible quantité concernée</li>
         </ul>
       </div>
     </div>
@@ -1228,12 +1261,12 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:14px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏫 IME DES 36 PONTS</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">IME DES 36 PONTS</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.84rem;line-height:2;color:#374151">
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Plus de problème sur la facturation depuis un point fait avec M. Keita</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#FFC000">→</span> Amélioration sur la facturation des repas livrés</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Le récapitulatif de commande ne correspond pas au tableau envoyé — des lignes manquantes</li>
+          <li style="padding:3px 0 3px 10px">Plus de problème sur la facturation depuis un point fait avec M. Keita</li>
+          <li style="padding:3px 0 3px 10px">Amélioration sur la facturation des repas livrés</li>
+          <li style="padding:3px 0 3px 10px">Le récapitulatif de commande ne correspond pas au tableau envoyé — des lignes manquantes</li>
         </ul>
       </div>
     </div>
@@ -1246,12 +1279,12 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:14px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏡 FAM / FAS LE BOSQUET</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">FAM / FAS LE BOSQUET</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.84rem;line-height:2;color:#374151">
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#22678E">ℹ</span> Liaison froide depuis l'EHPAD Edenis (Saint-Martory), géré par Acsent — midi et soir 7j/7</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#22678E">ℹ</span> Prestation payée au prix fixé dans la convention</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#22678E">ℹ</span> Pain et vivres crus petits-déjeuners gérés en interne par l'agent de restauration</li>
+          <li style="padding:3px 0 3px 10px">Liaison froide depuis l'EHPAD Edenis (Saint-Martory), géré par Acsent — midi et soir 7j/7</li>
+          <li style="padding:3px 0 3px 10px">Prestation payée au prix fixé dans la convention</li>
+          <li style="padding:3px 0 3px 10px">Pain et vivres crus petits-déjeuners gérés en interne par l'agent de restauration</li>
         </ul>
       </div>
     </div>
@@ -1264,12 +1297,12 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:14px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏠 EHPAD LA BASTIDE</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">EHPAD LA BASTIDE</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.84rem;line-height:2;color:#374151">
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Refonte complète du parcours commandes / réception / facturation vivres crus — opérationnelle et optimisée</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Réduction significative du coût/résident : <strong style="color:#1B3D6A">2,96 € → 1,08 €</strong></li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Travail de pédagogie et d'accompagnement auprès de tous les acteurs (salariés, prestataire, résidents)</li>
+          <li style="padding:3px 0 3px 10px">Refonte complète du parcours commandes / réception / facturation vivres crus — opérationnelle et optimisée</li>
+          <li style="padding:3px 0 3px 10px">Réduction significative du coût/résident : <strong style="color:#1B3D6A">2,96 € → 1,08 €</strong></li>
+          <li style="padding:3px 0 3px 10px">Travail de pédagogie et d'accompagnement auprès de tous les acteurs (salariés, prestataire, résidents)</li>
         </ul>
       </div>
     </div>
@@ -1282,14 +1315,14 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:12px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏥 EHPAD SAINT-VINCENT DE PAUL</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">EHPAD SAINT-VINCENT DE PAUL</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.81rem;line-height:1.8;color:#374151">
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Instabilité des équipes Acsent — changements cuisiniers, absence cheffe de cuisine 1 mois ½</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Hygiène locaux et cuisines : <strong>niveau d'alerte +++</strong></li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Difficultés sur le contrôle des températures</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Textures modifiées à la marge</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Non-respect des dotations vivres crus et des goûters</li>
+          <li style="padding:2px 0 2px 10px">Instabilité des équipes Acsent — changements cuisiniers, absence cheffe de cuisine 1 mois ½</li>
+          <li style="padding:2px 0 2px 10px">Hygiène locaux et cuisines : <strong>niveau d'alerte +++</strong></li>
+          <li style="padding:2px 0 2px 10px">Difficultés sur le contrôle des températures</li>
+          <li style="padding:2px 0 2px 10px">Textures modifiées à la marge</li>
+          <li style="padding:2px 0 2px 10px">Non-respect des dotations vivres crus et des goûters</li>
         </ul>
       </div>
     </div>
@@ -1302,15 +1335,15 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:12px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏛 MAS MARQUIOL</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">MAS MARQUIOL</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.81rem;line-height:1.8;color:#374151">
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Amélioration constatée entre oct. 2025 et fév. 2026 — corrections des retours, menus ajustés</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#FFC000">→</span> Textures globalement respectées ; erreurs signalées et solution proposée rapidement</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Goûts/dégoûts : éléments connus parfois non pris en compte</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Chariots du soir livrés très tôt pour service à 18h45</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> 4 EI depuis début 2026 : 3 textures/régimes NC · 1 altercation cuisinier/personnel</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Envoi hebdomadaire instauré depuis le 19 mai 2026</li>
+          <li style="padding:2px 0 2px 10px">Amélioration constatée entre oct. 2025 et fév. 2026 — corrections des retours, menus ajustés</li>
+          <li style="padding:2px 0 2px 10px">Textures globalement respectées ; erreurs signalées et solution proposée rapidement</li>
+          <li style="padding:2px 0 2px 10px">Goûts/dégoûts : éléments connus parfois non pris en compte</li>
+          <li style="padding:2px 0 2px 10px">Chariots du soir livrés très tôt pour service à 18h45</li>
+          <li style="padding:2px 0 2px 10px">4 EI depuis début 2026 : 3 textures/régimes NC · 1 altercation cuisinier/personnel</li>
+          <li style="padding:2px 0 2px 10px">Envoi hebdomadaire instauré depuis le 19 mai 2026</li>
         </ul>
       </div>
     </div>
@@ -1323,14 +1356,14 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:12px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏡 FOYER FOND PEYRÉ</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">FOYER FOND PEYRÉ</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.81rem;line-height:1.8;color:#374151">
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Quantités insuffisantes au repas du soir — signalées à plusieurs reprises</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Présentation des assiettes à améliorer pour maintenir l'appétence</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Erreurs de distribution le soir — mise à jour des noms sur les cloches nécessaire</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> 5 EI : feu plateau · plonge/glissement de tâche · propreté couverts · texture/régime · sécurité électrique</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Envoi hebdomadaire instauré depuis le 4 juin 2026</li>
+          <li style="padding:2px 0 2px 10px">Quantités insuffisantes au repas du soir — signalées à plusieurs reprises</li>
+          <li style="padding:2px 0 2px 10px">Présentation des assiettes à améliorer pour maintenir l'appétence</li>
+          <li style="padding:2px 0 2px 10px">Erreurs de distribution le soir — mise à jour des noms sur les cloches nécessaire</li>
+          <li style="padding:2px 0 2px 10px">5 EI : feu plateau · plonge/glissement de tâche · propreté couverts · texture/régime · sécurité électrique</li>
+          <li style="padding:2px 0 2px 10px">Envoi hebdomadaire instauré depuis le 4 juin 2026</li>
         </ul>
       </div>
     </div>
@@ -1343,10 +1376,10 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:14px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏛 ESAT ET EA CHÂTEAU BLANC</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">ESAT ET EA CHÂTEAU BLANC</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.84rem;line-height:2;color:#374151">
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#FFC000">→</span> Retours du Conseil de la Vie Sociale (CVS) : <strong>fréquence jugée trop importante des repas végétariens</strong></li>
+          <li style="padding:3px 0 3px 10px">Retours du Conseil de la Vie Sociale (CVS) : <strong>fréquence jugée trop importante des repas végétariens</strong></li>
         </ul>
       </div>
     </div>
@@ -1359,13 +1392,13 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:14px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏫 IME DES 36 PONTS</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">IME DES 36 PONTS</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.84rem;line-height:2;color:#374151">
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Qualité des repas toujours au niveau</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> M. Keita réceptif aux demandes des personnes accompagnées</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Manque de personnel (3 → 2 personnes) — temps d'attente au service</li>
-          <li style="padding:3px 0 3px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Erreurs sur les repas livrés → livraison depuis le site IME à confirmer</li>
+          <li style="padding:3px 0 3px 10px">Qualité des repas toujours au niveau</li>
+          <li style="padding:3px 0 3px 10px">M. Keita réceptif aux demandes des personnes accompagnées</li>
+          <li style="padding:3px 0 3px 10px">Manque de personnel (3 → 2 personnes) — temps d'attente au service</li>
+          <li style="padding:3px 0 3px 10px">Erreurs sur les repas livrés → livraison depuis le site IME à confirmer</li>
         </ul>
       </div>
     </div>
@@ -1378,15 +1411,15 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:12px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏡 FAM / FAS LE BOSQUET</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">FAM / FAS LE BOSQUET</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.81rem;line-height:1.8;color:#374151">
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#FFC000">→</span> 11 déclarations quantités insuffisantes → réajustées</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#FFC000">→</span> 3 déclarations repas répétitifs</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#FFC000">→</span> 2 déclarations soupe en vigilance caniculaire → repas soir à modifier avant juillet</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> 8 EI quantités insuffisantes · 3 EI salade fruits congelés · 3 EI textures modifiées</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Bonnes relations avec le personnel Acsent</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Relation de confiance avec l'équipe de l'EHPAD Edenis</li>
+          <li style="padding:2px 0 2px 10px">11 déclarations quantités insuffisantes → réajustées</li>
+          <li style="padding:2px 0 2px 10px">3 déclarations repas répétitifs</li>
+          <li style="padding:2px 0 2px 10px">2 déclarations soupe en vigilance caniculaire → repas soir à modifier avant juillet</li>
+          <li style="padding:2px 0 2px 10px">8 EI quantités insuffisantes · 3 EI salade fruits congelés · 3 EI textures modifiées</li>
+          <li style="padding:2px 0 2px 10px">Bonnes relations avec le personnel Acsent</li>
+          <li style="padding:2px 0 2px 10px">Relation de confiance avec l'équipe de l'EHPAD Edenis</li>
         </ul>
       </div>
     </div>
@@ -1399,15 +1432,15 @@
       </div>
       <div class="slide-body">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px;margin-bottom:12px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏠 EHPAD LA BASTIDE</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">EHPAD LA BASTIDE</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0;font-size:0.81rem;line-height:1.8;color:#374151">
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Résidents globalement satisfaits (qualitatif et quantitatif)</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#8DC441">✓</span> Bienveillance du chef de cuisine très appréciée</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#FFC000">→</span> Relations plus complexes avec certains membres de l'équipe (plonge, second)</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Service du soir écourtéé — résidents signalent précipitation</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Problèmes HACCP températures récurrents (alertes mail + téléphone)</li>
-          <li style="padding:2px 0 2px 20px;position:relative"><span style="position:absolute;left:0;color:#C4492D">⚠</span> Réchauffage au micro-ondes : pratique dangereuse — <strong>niveau d'alerte +++</strong></li>
+          <li style="padding:2px 0 2px 10px">Résidents globalement satisfaits (qualitatif et quantitatif)</li>
+          <li style="padding:2px 0 2px 10px">Bienveillance du chef de cuisine très appréciée</li>
+          <li style="padding:2px 0 2px 10px">Relations plus complexes avec certains membres de l'équipe (plonge, second)</li>
+          <li style="padding:2px 0 2px 10px">Service du soir écourtéé — résidents signalent précipitation</li>
+          <li style="padding:2px 0 2px 10px">Problèmes HACCP températures récurrents (alertes mail + téléphone)</li>
+          <li style="padding:2px 0 2px 10px">Réchauffage au micro-ondes : pratique dangereuse — <strong>niveau d'alerte +++</strong></li>
         </ul>
       </div>
     </div>
@@ -1420,10 +1453,10 @@
       </div>
       <div class="slide-body" style="display:flex;flex-direction:column;justify-content:center;gap:16px">
         <div style="background:#EBF3FA;border-left:4px solid #22678E;border-radius:6px;padding:8px 14px">
-          <strong style="color:#1B3D6A;font-size:0.88rem">🏕 FAM / EHPAD LE VAL D'ARIZE</strong>
+          <strong style="color:#1B3D6A;font-size:0.88rem">FAM / EHPAD LE VAL D'ARIZE</strong>
         </div>
         <div style="background:#FFF8E6;border:2px solid #FFC000;border-radius:10px;padding:18px 20px;font-size:0.86rem;line-height:1.9;color:#374151">
-          <div style="font-size:1rem;font-weight:700;color:#1B3D6A;margin-bottom:10px">🔥 Suite à l'incendie du 29 mai</div>
+          <div style="font-size:1rem;font-weight:700;color:#1B3D6A;margin-bottom:10px">Suite à l'incendie du 29 mai</div>
           L'<strong>implication</strong> et la <strong>bonne humeur</strong> du chef cuisinier ont été soulignées. Il a fait preuve d'une remarquable capacité d'adaptation et a nourri l'ensemble des personnes présentes sur le site :<br>
           <strong>résidents · personnels de l'établissement et du siège · pompiers</strong>
         </div>
@@ -1923,24 +1956,17 @@
             <div class="rank-item"><div class="rank-pos" style="font-size:0.7rem;background:#9CA3AF">9</div><div class="rank-bar-wrap"><div class="rank-name">EHPAD L'Albergue</div><div class="rank-bar"><div class="rank-fill" style="width:82%"></div></div></div><span class="rank-pct">42,38%</span></div>
             <div class="rank-item"><div class="rank-pos" style="font-size:0.7rem;background:#9CA3AF">10</div><div class="rank-bar-wrap"><div class="rank-name">MAS de Marquiol</div><div class="rank-bar"><div class="rank-fill" style="width:82%"></div></div></div><span class="rank-pct">42,34%</span></div>
           </div>
-          <div class="pie-visual" style="display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div class="pie-visual">
             <div class="pie-title">Total Achat par Gamme 2025</div>
-            <svg viewBox="0 0 180 180" width="170" height="170" style="overflow:visible">
-              <!-- Frais 45,59% : de -90° à 74,1° -->
-              <path d="M 90 90 L 90 10 A 80 80 0 0 1 111.81 166.98 Z" fill="#8DC441"/>
-              <!-- Surgelé 30,12% : de 74,1° à 182,6° -->
-              <path d="M 90 90 L 111.81 166.98 A 80 80 0 0 1 10.08 86.43 Z" fill="#3B82F6"/>
-              <!-- Épicerie 24,28% : de 182,6° à 270° -->
-              <path d="M 90 90 L 10.08 86.43 A 80 80 0 0 1 90 10 Z" fill="#FFC000"/>
-              <!-- Labels -->
-              <text x="112" y="106" font-size="11" font-weight="bold" fill="white" text-anchor="middle">45,6%</text>
-              <text x="48" y="126" font-size="11" font-weight="bold" fill="white" text-anchor="middle">30,1%</text>
-              <text x="54" y="58" font-size="11" font-weight="bold" fill="#1B3D6A" text-anchor="middle">24,3%</text>
-            </svg>
-            <div class="pie-legend">
-              <div class="pie-leg-item"><div class="pie-dot" style="background:#8DC441"></div><span class="pie-leg-label">Frais</span><span class="pie-leg-pct" style="color:#8DC441">45,59%</span></div>
+            <div class="pie-bar-container">
+              <div class="pie-bar-seg" style="width:45.59%;background:var(--vert)">45,6%</div>
+              <div class="pie-bar-seg" style="width:30.12%;background:#3B82F6">30,1%</div>
+              <div class="pie-bar-seg" style="width:24.29%;background:var(--jaune);color:#1B3D6A">24,3%</div>
+            </div>
+            <div class="pie-legend" style="margin-top:16px">
+              <div class="pie-leg-item"><div class="pie-dot" style="background:var(--vert)"></div><span class="pie-leg-label">Frais</span><span class="pie-leg-pct" style="color:var(--vert)">45,59%</span></div>
               <div class="pie-leg-item"><div class="pie-dot" style="background:#3B82F6"></div><span class="pie-leg-label">Surgelé</span><span class="pie-leg-pct" style="color:#3B82F6">30,12%</span></div>
-              <div class="pie-leg-item"><div class="pie-dot" style="background:#FFC000"></div><span class="pie-leg-label">Épicerie</span><span class="pie-leg-pct" style="color:#c48b00">24,28%</span></div>
+              <div class="pie-leg-item"><div class="pie-dot" style="background:var(--jaune)"></div><span class="pie-leg-label">Épicerie</span><span class="pie-leg-pct" style="color:#c48b00">24,28%</span></div>
             </div>
           </div>
         </div>
@@ -1969,23 +1995,16 @@
             <div class="rank-item"><div class="rank-pos" style="font-size:0.7rem;background:#9CA3AF">9</div><div class="rank-bar-wrap"><div class="rank-name">Portes de Garonne</div><div class="rank-bar"><div class="rank-fill" style="width:82%"></div></div></div><span class="rank-pct">53,02%</span></div>
             <div class="rank-item"><div class="rank-pos" style="font-size:0.7rem;background:#9CA3AF">10</div><div class="rank-bar-wrap"><div class="rank-name">ESAT Château Blanc</div><div class="rank-bar"><div class="rank-fill" style="width:82%"></div></div></div><span class="rank-pct">52,91%</span></div>
           </div>
-          <div class="pie-visual" style="display:flex;flex-direction:column;align-items:center;gap:14px">
+          <div class="pie-visual">
             <div class="pie-title">Total Achat par Origine 2025</div>
-            <svg viewBox="0 0 180 180" width="170" height="170" style="overflow:visible">
-              <!-- France 59,02% : de -90° à 122,5° (large arc) -->
-              <path d="M 90 90 L 90 10 A 80 80 0 1 1 47.02 157.47 Z" fill="#22678E"/>
-              <!-- UE 29,53% : de 122,5° à 228,8° -->
-              <path d="M 90 90 L 47.02 157.47 A 80 80 0 0 1 37.26 29.85 Z" fill="#FFC000"/>
-              <!-- Import 11,45% : de 228,8° à 270° -->
-              <path d="M 90 90 L 37.26 29.85 A 80 80 0 0 1 90 10 Z" fill="#dc2626"/>
-              <!-- Labels -->
-              <text x="100" y="90" font-size="11" font-weight="bold" fill="white" text-anchor="middle">59,0%</text>
-              <text x="58" y="145" font-size="11" font-weight="bold" fill="#1B3D6A" text-anchor="middle">29,5%</text>
-              <text x="52" y="44" font-size="11" font-weight="bold" fill="white" text-anchor="middle">11,5%</text>
-            </svg>
-            <div class="pie-legend">
-              <div class="pie-leg-item"><div class="pie-dot" style="background:#22678E"></div><span class="pie-leg-label">France 🇫🇷</span><span class="pie-leg-pct" style="color:#22678E">59,02%</span></div>
-              <div class="pie-leg-item"><div class="pie-dot" style="background:#FFC000"></div><span class="pie-leg-label">Union Européenne 🇪🇺</span><span class="pie-leg-pct" style="color:#c48b00">29,53%</span></div>
+            <div class="pie-bar-container">
+              <div class="pie-bar-seg" style="width:59.02%;background:var(--bleu)">59%</div>
+              <div class="pie-bar-seg" style="width:29.53%;background:var(--jaune);color:#1B3D6A">29,5%</div>
+              <div class="pie-bar-seg" style="width:11.45%;background:#dc2626">11,5%</div>
+            </div>
+            <div class="pie-legend" style="margin-top:16px">
+              <div class="pie-leg-item"><div class="pie-dot" style="background:var(--bleu)"></div><span class="pie-leg-label">France 🇫🇷</span><span class="pie-leg-pct" style="color:var(--bleu)">59,02%</span></div>
+              <div class="pie-leg-item"><div class="pie-dot" style="background:var(--jaune)"></div><span class="pie-leg-label">Union Européenne 🇪🇺</span><span class="pie-leg-pct" style="color:#c48b00">29,53%</span></div>
               <div class="pie-leg-item"><div class="pie-dot" style="background:#dc2626"></div><span class="pie-leg-label">Import</span><span class="pie-leg-pct" style="color:#dc2626">11,45%</span></div>
             </div>
           </div>
@@ -2122,7 +2141,7 @@
               <span class="theme-tag">Le Dressage des Plats</span>
             </div>
             <div class="pot-next">
-              🎯 Thème du prochain Paula On Tour — à définir Ensemble !
+              Thème du prochain Paula On Tour — à définir Ensemble !
             </div>
           </div>
         </div>
@@ -2150,7 +2169,7 @@
     <!-- NAVIGATION DIAPORAMA -->
     <div class="slide-nav">
       <button class="slide-nav-btn" id="prevBtn" onclick="changeSlide(-1)" disabled>← Précédent</button>
-      <div style="display:flex;flex-direction:column;align-items:center;gap:8px">
+      <div style="display:flex;flex-direction:column;align-items:center;gap:8px;flex:1">
         <div class="slide-dots" id="slideDots"></div>
         <span class="slide-counter" id="slideCounter">Slide 1 / 35</span>
       </div>
@@ -2160,7 +2179,7 @@
 </section>
 
 <!-- ===== SECTION GALERIE ===== -->
-<section id="galerie" class="section-collapsed" style="max-width:100%;padding:50px 30px;background:white;border-top:1px solid #e5e7eb">
+<section id="galerie" class="page" style="max-width:100%;padding:50px 30px;background:white">
   <div class="inner">
     <div class="section-title">
       <h2>Paula On Tour</h2>
@@ -2224,15 +2243,13 @@ document.addEventListener('keydown', e => {
   if (e.key === 'ArrowLeft') changeSlide(-1);
 });
 
-// ===== TOGGLE SECTIONS =====
-function toggleSection(id, navEl) {
-  const section = document.getElementById(id);
-  const wasCollapsed = section.classList.contains('section-collapsed');
-  section.classList.toggle('section-collapsed');
-  navEl.classList.toggle('open', wasCollapsed);
-  if (wasCollapsed) {
-    setTimeout(() => section.scrollIntoView({behavior: 'smooth', block: 'start'}), 50);
-  }
+// ===== NAVIGATION PAR PAGES =====
+function showPage(id, navEl) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  navEl.classList.add('active');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ===== KPI TABS =====
@@ -2243,11 +2260,6 @@ function showKpi(id, btn) {
   btn.classList.add('active');
 }
 
-// ===== NAV ACTIVE =====
-function setActive(el) {
-  document.querySelectorAll('nav a').forEach(a => a.classList.remove('active'));
-  el.classList.add('active');
-}
 
 // ===== GALLERY =====
 const images = [
@@ -2318,18 +2330,6 @@ document.addEventListener('keydown', e => {
   }
 });
 
-// Scroll spy for nav
-window.addEventListener('scroll', () => {
-  const sections = ['kpis', 'diaporama', 'galerie'];
-  let current = '';
-  sections.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && !el.classList.contains('section-collapsed') && window.scrollY >= el.offsetTop - 100) current = id;
-  });
-  document.querySelectorAll('nav a').forEach(a => {
-    a.classList.toggle('active', a.getAttribute('href') === '#' + current);
-  });
-});
 
 // Init
 initDots();
